@@ -47,9 +47,9 @@ include_graphics("https://images.squarespace-cdn.com/content/v1/5661b263e4b0830b
 
 # Introduction 
 
-1. Introduce your research question
-1. Describe your data source and context
-1. Add anything else you think the reader should know
+1. Research Question: What are the trends in Hass Avocado sales in different regions of the US and how does it change over time? 
+1. Context: According to the USDA, the United States has tripled their per capita consumption of avocados  since the early 2000’s, with about 95% being Hass avocados. Along with its taste, size, and longer shelf life, Hass avocados have had greater growing yield in certain regions. The following dataset’s information directly comes from retailers describing the price of avocados and the amount they sell. 
+1. In the case of this dataset, the difference between organic and conventional is the amount of detectable levels of pesticides residue. 
 
 This is an example of how to cite your sources so that it shows up in the Citations and References section:^[Crouch, Ian. [How the Left Won the War for Gritty, the New Mascot of the Philadelphia Flyers](https://www.newyorker.com/culture/culture-desk/how-the-left-won-the-war-for-gritty). The New Yorker. October 10, 2018.]
 
@@ -61,11 +61,12 @@ This is an example of how to cite your sources so that it shows up in the Citati
 
 ```{r}
 # Change this code to load your CSV file from the web and do any data cleaning here:
-avocado_data <- read_csv("avocados.csv") #%>% 
+avocado_data <- read_csv("avocados.csv") %>% 
   # Select only the needed variables:
-  #select(County, Community, Rural_Urban, Functional_Class, Avg_Speed, Total_Volume, Crashes) %>% 
+  select(-XLarge.Bags) %>% 
   # Drop rows with missing data for crashes
-  #filter(!is.na(Crashes))
+  filter(region == "Midsouth"|region == "NorthernNewEngland"|region == "Northeast"|
+           region == "Southeast"|region == "West" | region == "Plains" )
 ```
 
 
@@ -91,29 +92,32 @@ avocado_data %>%
 
 ```{r}
 # Insert code to output a table of summary statistics:
-#avocado_data %>%  
+avocado_model <- lm(AveragePrice ~ year, data = avocado_data)
+get_regression_table(avocado_model)
 ```
 
 
 ```{r}
 # Insert code to output a table of summary statistics, but this time
 # split by the different levels of the categorical variable:
-
+avocado_mod_categorical <- lm(AveragePrice ~ type, data = avocado_data)
+get_regression_table(avocado_mod_categorical)
 ```
 
 
 ## Data visualizations
 
-```{r, fig.cap = "Figure 1: INSERT TITLE", fig.align = "center"}
-avocado_data_2015 <- avocado_data %>% 
-  filter(year == 2015)
+```{r, fig.cap = "Figure 1: TRENDS IN AVOCADO PRICES IN 2016", fig.align = "center"}
+avocado_data_2016 <- avocado_data %>% 
+  filter(year == 2016)
 
 # Insert code to visualize the distribution of outcome variable:
-ggplot(avocado_data_2015, aes(y = AveragePrice, x = Date)) +
+ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date)) +
   geom_point() +
-  labs(x = "Year", 
+  geom_smooth(method = "lm", se = FALSE) + 
+  labs(x = "Month", 
        y = "Average Price", 
-       title = "Relationship between Average Price of Avocados and year") +
+       title = "Average Prices of Avocados in 2016 (by region)") +
   facet_wrap(~region)
 ```
 
