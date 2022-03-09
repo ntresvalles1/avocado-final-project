@@ -66,7 +66,8 @@ avocado_data <- read_csv("avocados.csv") %>%
   select(-XLarge.Bags) %>% 
   # Drop rows with missing data for crashes
   filter(region == "Midsouth"|region == "NorthernNewEngland"|region == "Northeast"|
-           region == "Southeast"|region == "West" | region == "Plains" )
+           region == "Southeast"|region == "West" | region == "Plains" ) %>% 
+  select(-large_hass_sold, -small_hass_sold, -xlarage_hass_sold, -Total.Bags, -Small.Bags, -Large.Bags)
 ```
 
 
@@ -74,12 +75,13 @@ avocado_data <- read_csv("avocados.csv") %>%
 
 Give people a sense for your data by describing:
 
-1. What each observation in each row corresponds to
-1. Sample size
-1. Outcome variable $y$
-1. Numerical explanatory variable $x_1$
-1. Categorical explanatory variable $x_2$ and what the $k$ levels/categories are
+1. What each observation in each row corresponds to: Each observation corresponds to the average price of a single avocado being sold in a given date and region. 
+1. Sample size: Rhere’s a total of 18,259 observations included in the dataset.
+1. Outcome variable $y$: the average price of an avocado 
+1. Numerical explanatory variable $x_1$: total volume of avocados sold
+1. Categorical explanatory variable $x_2$ and what the $k$ levels/categories are: Date and year of observation, Region of the observation, type of avocado (organic/conventional), average
 1. Display a snapshot of five randomly chosen rows of data
+
 
 ```{r}
 # Change this code to show a random sample of 5 rows of the data:
@@ -107,12 +109,24 @@ get_regression_table(avocado_mod_categorical)
 
 ## Data visualizations
 
-```{r, fig.cap = "Figure 1: TRENDS IN AVOCADO PRICES IN 2016", fig.align = "center"}
+```{r, fig.cap = "Figure 1: Avocado Average Prices in 2016", fig.align = "center"}
+# Insert code to visualize the distribution of outcome variable:
 avocado_data_2016 <- avocado_data %>% 
   filter(year == 2016)
 
-# Insert code to visualize the distribution of outcome variable:
-ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date)) +
+ggplot(avocado_data_2016, aes(x = factor(type), y = AveragePrice)) +
+  geom_boxplot() +
+  labs(x = "Type of Avocado", 
+       y = "Average Price", 
+       title = "Average Prices of Avocados in 2016 (by type)")
+```
+
+Describe any key insight from Figure 1 here.
+The average median price for organic avocados seems to be much higher than the averager median price for conventional avocados. 
+
+```{r, fig.cap = "Figure 2: Avocado Average Prices in 2016", fig.align = "center"}
+# Insert code to visualize the relationship between outcome variable and numerical explanatory variable:
+ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date, color = type)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
   labs(x = "Month", 
@@ -121,25 +135,34 @@ ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date)) +
   facet_wrap(~region)
 ```
 
-Describe any key insight from Figure 1 here.
-
-
-```{r, fig.cap = "Figure 2: INSERT TITLE", fig.align = "center"}
-# Insert code to visualize the relationship between outcome variable and numerical explanatory variable:
-
-```
-
 Describe any key insight from Figure 2 here.
+Consistently across all regions, the average price of an organic avocado is higher than its conventional counter part. The Northeast and Plains region seems to have stronger correlation coefficients than their counterpart.
 
 ```{r, fig.cap = "Figure 3: INSERT TITLE", fig.align = "center"}
 # Insert code to visualize the relationship between outcome variable and categorical explanatory variable:
-
+ggplot(avocado_data_2016, aes(y = Total.Volume, x = region)) +
+  geom_boxplot() +
+  labs(x = "Region", 
+       y = "Total Volume", 
+       title = "Total Volume of Avocados Sold in 2016 (by region)") +
+  scale_y_continuous(labels = scales::comma)
 ```
 
 Describe any key insight from Figure 3 here.
 
 ```{r, fig.cap = "Figure 4: INSERT TITLE", fig.align = "center"}
 # Insert code to visualize interaction model:
+ggplot(avocado_data_2016, aes(x = Total.Volume, y = AveragePrice, color = region)) +
+  geom_point() +
+  labs(x = "Total Volume", y = "Average Price", color = "Region", 
+       title = "Average Price of Total Volume of Avocados Sold in 2016 (by region)") +
+  geom_smooth(method = "lm", se = FALSE)
+
+# Fit regression model:
+avocado_model_interaction <- lm(AveragePrice ~ Total.Volume * region, data = avocado_data_2016)
+
+# Get regression table:
+get_regression_table(avocado_model_interaction)
 
 ```
 
@@ -147,7 +170,16 @@ Describe any key insight from Figure 4 here.
 
 ```{r, fig.cap = "Figure 5: INSERT TITLE", fig.align = "center"}
 # Insert code to visualize parallel slopes model:
-
+ggplot(avocado_data_2016, aes(x = Total.Volume, y = AveragePrice, color = region)) +
+  geom_point() +
+  labs(x = "Total Volume", y = "Average Price", color = "Region", 
+       title = "Average Price of Total Volume of Avocados Sold in 2016 (by region)") +
+  geom_parallel_slopes(se = FALSE)
+  
+# Fit regression model:
+avocado_model_parallel_slopes <- lm(AveragePrice ~ Total.Volume + region, data = avocado_data_2016)
+# Get regression table:
+get_regression_table(avocado_model_parallel_slopes)  
 ```
 
 Describe any key insight from Figure 5 here.
