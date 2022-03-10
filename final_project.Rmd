@@ -1,6 +1,6 @@
 
 ---
-title: "ADD YOUR TITLE HERE"
+title: "Trends in Avocado Prices"
 author: "Nicole Tresvalles & Karen Galvan"
 date: "Last updated on `r Sys.Date()`"
 output:
@@ -118,6 +118,7 @@ ggplot(avocado_data_2016, aes(x = factor(type), y = AveragePrice)) +
   labs(x = "Type of Avocado", 
        y = "Average Price", 
        title = "Average Prices of Avocados in 2016 (by type)")
+
 ```
 
 Describe any key insight from Figure 1 here.
@@ -144,7 +145,8 @@ ggplot(avocado_data_2016, aes(y = Total.Volume, x = region)) +
   labs(x = "Region", 
        y = "Total Volume", 
        title = "Total Volume of Avocados Sold in 2016 (by region)") +
-  scale_y_continuous(labels = scales::comma)
+  scale_y_continuous(labels = scales::comma) +
+  scale_x_discrete(labels=c("Midsouth","Northeast","New England","Plains","Southeast","West")) 
 ```
 
 Describe any key insight from Figure 3 here.
@@ -243,7 +245,7 @@ From the initial glance at the visualizations, we conclude that organic avocados
 
 ## Project peers
 
-Name all people who contributed in any way to this project (other than groupmates, Prof. Kim, and Beth Brown): Karen Galvan & Nicole Tresvalles
+Name all people who contributed in any way to this project (other than groupmates, Prof. Kim, and Beth Brown): Not applicable
 
 ## Code sources
 
@@ -251,6 +253,7 @@ List any sources for coding matters you consulted in bullet point form (other th
 
 1. [Labeling legends in ggplot2](https://www.datanovia.com/en/blog/ggplot-legend-title-position-and-labels/)
 1. [Randomly sampling rows with dplyr](https://www.datasciencemadesimple.com/select-random-samples-r-dplyr-sample_n-sample_frac/#:~:text=Dplyr%20package%20in%20R%20is,the%20random%20N%25%20of%20rows.)
+1. [Changing x-label tick marks](https://stackoverflow.com/questions/23564607/how-to-change-x-axis-tick-label-names-order-and-boxplot-colour-using-r-ggplot)
 
 ## Citations and References
 
