@@ -78,10 +78,10 @@ avocado_data_2016 <- avocado_data %>%
 Give people a sense for your data by describing:
 
 1. What each observation in each row corresponds to: Each observation corresponds to the average price of a single avocado being sold in a given date and region. 
-1. Sample size: Rhere’s a total of 18,259 observations included in the dataset.
-1. Outcome variable $y$: the average price of an avocado 
-1. Numerical explanatory variable $x_1$: total volume of avocados sold
-1. Categorical explanatory variable $x_2$ and what the $k$ levels/categories are: Date and year of observation, Region of the observation, type of avocado (organic/conventional), average
+1. Sample size: There’s a total of 18,259 observations included in the dataset
+1. Outcome variable $y$: The average price of an avocado
+1. Numerical explanatory variable $x_1$: Total volume of avocados sold
+1. Categorical explanatory variable $x_2$ and what the $k$ levels/categories are: Date and year of observation, Region of the observation (which has 6 categories), type of avocado (organic/conventional)
 1. Display a snapshot of five randomly chosen rows of data
 
 
@@ -121,8 +121,7 @@ ggplot(avocado_data_2016, aes(x = factor(type), y = AveragePrice)) +
 
 ```
 
-Describe any key insight from Figure 1 here.
-The average median price for organic avocados seems to be much higher than the averager median price for conventional avocados. 
+The median average price for organic avocados in 2016 is much greater than the median average price for conventional avocados. The approximated difference seems to be $0.50. 
 
 ```{r, fig.cap = "Figure 2: Avocado Average Prices in 2016", fig.align = "center"}
 # Insert code to visualize the relationship between outcome variable and numerical explanatory variable:
@@ -135,21 +134,20 @@ ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date, color = type)) +
   facet_wrap(~region)
 ```
 
-Describe any key insight from Figure 2 here.
-Consistently across all regions, the average price of an organic avocado is higher than its conventional counter part. The Northeast and Plains region seems to have stronger correlation coefficients than their counterpart.
+Consistently across all regions in 2016, the average price of an organic avocado is greater than its conventional counter part. Specifically, the Northeast and Plains regions seem to have stronger correlation coefficients than their counterpart.
 
 ```{r, fig.cap = "Figure 3: Total Volume of Avocado Sold in 2016", fig.align = "center"}
 # Insert code to visualize the relationship between outcome variable and categorical explanatory variable:
-ggplot(avocado_data_2016, aes(y = Total.Volume, x = region)) +
+ggplot(avocado_data_2016, aes(y = AveragePrice, x = region)) +
   geom_boxplot() +
   labs(x = "Region", 
-       y = "Total Volume", 
+       y = "Average Price", 
        title = "Total Volume of Avocados Sold in 2016 (by region)") +
   scale_y_continuous(labels = scales::comma) +
   scale_x_discrete(labels=c("Midsouth","Northeast","New England","Plains","Southeast","West")) 
 ```
 
-Describe any key insight from Figure 3 here.
+The median average price of avocados sold in 2016 seems to be much lower in the West than in other regions of the US, with the Northeast having the highest median average price.
 
 ```{r, fig.cap = "Figure 4: Average Price of Total Volume Sold in 2016 (Interaction)", fig.align = "center"}
 # Insert code to visualize interaction model:
@@ -168,7 +166,7 @@ get_regression_table(avocado_model_interaction)
 
 ```
 
-Describe any key insight from Figure 4 here.
+This visualization gives us the insight that the avocado prices in Northeast averages much higher per pound than avocados in other regions. Throughout the regions, as the total volume sold increases, the average price of the avocados decrease. A significant note is that in the Plains, the trend decreases much quicker compared to the other regions. 
 
 ```{r, fig.cap = "Figure 5: Average Price of Total Volume Sold in 2016 (Parallel)", fig.align = "center"}
 # Insert code to visualize parallel slopes model:
@@ -185,7 +183,7 @@ avocado_model_parallel_slopes <- lm(AveragePrice ~ Total.Volume + region, data =
 get_regression_table(avocado_model_parallel_slopes)  
 ```
 
-Describe any key insight from Figure 5 here.
+Like the previous model, this visualization gives us the insight that the avocado prices in Northeast averages higher per pound than avocados in other regions, followed by avocados in the West, Midsouth, South East, the Plains, and Northern New England. Furthermore, as the total volume of avocados sold increases, the average price decreases.  
 
 ## Initial conclusions
 
@@ -194,34 +192,95 @@ Write:
 - What insight you would tell your grandmother
 - Your initial model selection choice, interaction or parallel slopes model, and why.
 
-From the initial glance at the visualizations, we conclude that organic avocados tend to consistently cost more on average across all the regions we highlighted. Furthermore, as total volume of avocados sold increases, the average price gets less, which might be because of wholesale. As for the model selection, it seems like the parallel slopes model would be the best choice because it is easier to interpret. It has a lot less variation compared to the interaction model that has different intercepts and different slopes. Furthermore, the interaction model has additional complexity which can be seen by the additional rows in the interaction regression table.  
+From the initial glance at the visualizations, we conclude that organic avocados tend to consistently cost more on average across all the regions we highlighted. Furthermore, as the total volume of avocados sold increases, the average price gets less, which might be because of wholesale. As for the model selection, it seems like the parallel slopes model would be the best choice because it is easier to interpret. It has a lot less variation compared to the interaction model that has different intercepts and different slopes. Furthermore, the interaction model has additional complexity which can be seen by the additional rows in the interaction regression table.  
 
 
 
 
 ***
 
-
-
 # Multiple linear regression
 
-## Methods
+## Regression table
+
+Instructions:
+
+- Indicate which model you selected: parallel slopes or interaction.
+- Fit your selected regression model and display the regression table in the code 
+block below
+- Modify the template formula below from ModernDive 6.1.2 to match your model (this formula is written in the LaTeX typesetting language for printing mathematical formulas)
+
+```{r}
+# Insert code to fit your regression model and show the regression table. 
+```
+
+$$
+\widehat{y} = 
+4.883 
+- 0.018 \cdot \text{age}  
+- 0.446 \cdot \mathbb{1}_{\text{is male}}(x)
++ 0.014 \cdot \text{age} \cdot \mathbb{1}_{\text{is male}}(x)
+$$
 
 
-## Model Results
+## Interpreting regression coefficients
 
+Interpret all regressions coefficients in the `estimate` column in the following list:
 
-## Interpreting the regression table
+1. Interpretation 1
+1. Interpretation 2
+1. ...
 
 
 ## Inference for multiple regression
 
+**You will complete the rest of Section 3 at the project resubmission phase due the last day of exams.**
 
-## Residual Analysis
+From the above regression table, interpret the confidence interval and p-value for at least two non-intercept terms:
 
+1. Interpretation 1
+1. Interpretation 2
+1. (optional) Interpretation 3
+1. (optional) ...
+
+
+## Conditions for inference for regression
+
+Verify the **LINE** conditions for inference for regression for all confidence intervals and p-values from
+your regression table to have valid interpretation
+
+### Linearity of relationship
+
+### Independence of residuals
+
+### Normality of residuals
+
+```{r, fig.cap = "Figure 6: INSERT TITLE", fig.align = "center"}
+# Insert code to visualize the distribution of the residuals:
+```
+
+### Equality of variance
+
+```{r, fig.cap = "Figure 6: INSERT TITLE", fig.align = "center"}
+# Insert code to visualize the relationship between the residuals and your
+# numerical explanatory/categorical variable:
+```
+
+```{r, fig.cap = "Figure 7: INSERT TITLE", fig.align = "center"}
+# Insert code to visualize the relationship between the residuals and your
+# categorical explanatory/categorical variable:
+```
 
 
 ***
+
+
+
+
+
+
+
+
 
 
 
