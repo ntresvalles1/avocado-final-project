@@ -120,9 +120,11 @@ The median average price for organic avocados in 2016 is much greater than the m
 
 ```{r, fig.cap = "Figure 2: Avocado Average Prices in 2016", fig.align = "center"}
 # Insert code to visualize the relationship between outcome variable and numerical explanatory variable:
+
 ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date, color = type)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
+  theme(axis.text.x=element_text(angle=60, hjust=1))+
   labs(x = "Month", 
        y = "Average Price", 
        title = "Average Prices of Avocados in 2016 (by region)") +
