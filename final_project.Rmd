@@ -48,12 +48,7 @@ include_graphics("https://images.squarespace-cdn.com/content/v1/5661b263e4b0830b
 
 # Introduction 
 
-1. Research Question: What are the trends in Hass Avocado sales in different regions of the US and how does it change over time? 
-1. Context: According to the USDA, the United States has tripled their per capita consumption of avocados  since the early 2000’s, with about 95% being Hass avocados. Along with its taste, size, and longer shelf life, Hass avocados have had greater growing yield in certain regions^[Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022, from [here](https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe).]. The following dataset’s information directly comes from retailers describing the price of avocados and the amount they sell. 
-1. In the case of this dataset, the difference between organic and conventional is the amount of detectable levels of pesticides residue. 
-
-
-
+For this final project, we are interested in the the trends in Hass Avocado sales in different regions of the US and how sales change over time. According to the USDA, the United States has tripled their per capita consumption of avocados  since the early 2000’s, with about 95% of avocados sold being Hass avocados. Along with its taste, size, and longer shelf life, Hass avocados have had greater growing yield in certain regions^[Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022, from [here](https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe).]. The information under the following dataset is directly reported by retailers describing the price of avocados and the amount they sell. We've filtered the dataset as to only include reports from the Northeast, West, and Plains regions of the US. In addition to region of avocado sales, the data we work with also provide information about date, year, total volume of avocado sales, as well as the type of avocado involved. The dataset reports that type differentiates organic and conventional avocados, which is determined the amount of detectable levels of pesticides residue. 
 
 ***
 
