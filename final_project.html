@@ -248,7 +248,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Trends in Avocado Prices</h1>
 <h4 class="author">Nicole Tresvalles &amp; Karen Galvan</h4>
-<h4 class="date">Last updated on 2022-03-10</h4>
+<h4 class="date">Last updated on 2022-03-31</h4>
 
 </div>
 
@@ -291,44 +291,44 @@ div.tocify {
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">2018-03-18</td>
-<td align="right">1.52</td>
-<td align="right">179316.20</td>
-<td align="left">organic</td>
-<td align="right">2018</td>
-<td align="left">Midsouth</td>
+<td align="left">2016-08-28</td>
+<td align="right">0.96</td>
+<td align="right">6114187.88</td>
+<td align="left">conventional</td>
+<td align="right">2016</td>
+<td align="left">West</td>
 </tr>
 <tr class="even">
-<td align="left">2017-07-23</td>
-<td align="right">1.72</td>
-<td align="right">78813.04</td>
-<td align="left">organic</td>
-<td align="right">2017</td>
-<td align="left">Southeast</td>
+<td align="left">2018-01-14</td>
+<td align="right">1.05</td>
+<td align="right">7577456.14</td>
+<td align="left">conventional</td>
+<td align="right">2018</td>
+<td align="left">West</td>
 </tr>
 <tr class="odd">
-<td align="left">2017-10-01</td>
-<td align="right">1.99</td>
-<td align="right">149030.87</td>
+<td align="left">2017-11-12</td>
+<td align="right">1.89</td>
+<td align="right">51340.54</td>
 <td align="left">organic</td>
 <td align="right">2017</td>
-<td align="left">Midsouth</td>
+<td align="left">Plains</td>
 </tr>
 <tr class="even">
-<td align="left">2017-06-25</td>
-<td align="right">1.93</td>
-<td align="right">21227.79</td>
+<td align="left">2016-09-25</td>
+<td align="right">1.51</td>
+<td align="right">14401.06</td>
 <td align="left">organic</td>
-<td align="right">2017</td>
+<td align="right">2016</td>
 <td align="left">NorthernNewEngland</td>
 </tr>
 <tr class="odd">
-<td align="left">2016-10-30</td>
-<td align="right">1.96</td>
-<td align="right">72130.37</td>
+<td align="left">2015-06-28</td>
+<td align="right">1.62</td>
+<td align="right">67201.29</td>
 <td align="left">organic</td>
-<td align="right">2016</td>
-<td align="left">Northeast</td>
+<td align="right">2015</td>
+<td align="left">Midsouth</td>
 </tr>
 </tbody>
 </table>
@@ -699,21 +699,58 @@ Figure 5: Average Price of Total Volume Sold in 2016 (Parallel)
 </div>
 <div id="multiple-linear-regression" class="section level1" number="3">
 <h1 number="3"><span class="header-section-number">3</span> Multiple linear regression</h1>
-<div id="methods" class="section level2" number="3.1">
-<h2 number="3.1"><span class="header-section-number">3.1</span> Methods</h2>
+<div id="regression-table" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Regression table</h2>
+<p>Instructions:</p>
+<ul>
+<li>Indicate which model you selected: parallel slopes or interaction.</li>
+<li>Fit your selected regression model and display the regression table in the code block below</li>
+<li>Modify the template formula below from ModernDive 6.1.2 to match your model (this formula is written in the LaTeX typesetting language for printing mathematical formulas)</li>
+</ul>
+<p><span class="math display">\[
+\widehat{y} = 
+4.883 
+- 0.018 \cdot \text{age}  
+- 0.446 \cdot \mathbb{1}_{\text{is male}}(x)
++ 0.014 \cdot \text{age} \cdot \mathbb{1}_{\text{is male}}(x)
+\]</span></p>
 </div>
-<div id="model-results" class="section level2" number="3.2">
-<h2 number="3.2"><span class="header-section-number">3.2</span> Model Results</h2>
+<div id="interpreting-regression-coefficients" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Interpreting regression coefficients</h2>
+<p>Interpret all regressions coefficients in the <code>estimate</code> column in the following list:</p>
+<ol style="list-style-type: decimal">
+<li>Interpretation 1</li>
+<li>Interpretation 2</li>
+<li>…</li>
+</ol>
 </div>
-<div id="interpreting-the-regression-table" class="section level2" number="3.3">
-<h2 number="3.3"><span class="header-section-number">3.3</span> Interpreting the regression table</h2>
+<div id="inference-for-multiple-regression" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Inference for multiple regression</h2>
+<p><strong>You will complete the rest of Section 3 at the project resubmission phase due the last day of exams.</strong></p>
+<p>From the above regression table, interpret the confidence interval and p-value for at least two non-intercept terms:</p>
+<ol style="list-style-type: decimal">
+<li>Interpretation 1</li>
+<li>Interpretation 2</li>
+<li>(optional) Interpretation 3</li>
+<li>(optional) …</li>
+</ol>
 </div>
-<div id="inference-for-multiple-regression" class="section level2" number="3.4">
-<h2 number="3.4"><span class="header-section-number">3.4</span> Inference for multiple regression</h2>
+<div id="conditions-for-inference-for-regression" class="section level2" number="3.4">
+<h2 number="3.4"><span class="header-section-number">3.4</span> Conditions for inference for regression</h2>
+<p>Verify the <strong>LINE</strong> conditions for inference for regression for all confidence intervals and p-values from your regression table to have valid interpretation</p>
+<div id="linearity-of-relationship" class="section level3" number="3.4.1">
+<h3 number="3.4.1"><span class="header-section-number">3.4.1</span> Linearity of relationship</h3>
 </div>
-<div id="residual-analysis" class="section level2" number="3.5">
-<h2 number="3.5"><span class="header-section-number">3.5</span> Residual Analysis</h2>
+<div id="independence-of-residuals" class="section level3" number="3.4.2">
+<h3 number="3.4.2"><span class="header-section-number">3.4.2</span> Independence of residuals</h3>
+</div>
+<div id="normality-of-residuals" class="section level3" number="3.4.3">
+<h3 number="3.4.3"><span class="header-section-number">3.4.3</span> Normality of residuals</h3>
+</div>
+<div id="equality-of-variance" class="section level3" number="3.4.4">
+<h3 number="3.4.4"><span class="header-section-number">3.4.4</span> Equality of variance</h3>
 <hr />
+</div>
 </div>
 </div>
 <div id="discussion" class="section level1" number="4">
@@ -752,7 +789,7 @@ Figure 5: Average Price of Total Volume Sold in 2016 (Parallel)
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022, from (<a href="https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#" class="uri">https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#</a>:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe).<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022, from <a href="https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe">here</a>.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
