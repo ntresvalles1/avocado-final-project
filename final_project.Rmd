@@ -28,6 +28,7 @@ library(dplyr)
 library(readr)
 library(moderndive)
 library(knitr)
+library(tidyverse)
 
 # Add any additionally needed packages here:
 
@@ -58,9 +59,10 @@ For this final project, we are interested in the the trends in Hass Avocado sale
 avocado_data <- read_csv("https://wjhopper.github.io/SDS-201/data/avocados.csv") %>% 
   # Select only the needed variables:
   select(-XLarge.Bags) %>% 
+  mutate(region = replace(region, region == "NorthernNewEngland", "Northeast")) %>% 
   # Drop rows with missing data for crashes
-  filter(region == "Midsouth"|region == "NorthernNewEngland"|region == "Northeast"|
-           region == "Southeast"|region == "West" | region == "Plains" ) %>% 
+  filter(region == "Northeast"|
+          region == "West" | region == "Plains" ) %>% 
   select(-large_hass_sold, -small_hass_sold, -xlarage_hass_sold, -Total.Bags, -Small.Bags, -Large.Bags)
 
 avocado_data_2016 <- avocado_data %>% 
@@ -99,8 +101,12 @@ get_regression_table(avocado_model)
 ```{r}
 # Insert code to output a table of summary statistics, but this time
 # split by the different levels of the categorical variable:
+
+
 avocado_mod_categorical <- lm(AveragePrice ~ region, data = avocado_data)
+
 get_regression_table(avocado_mod_categorical)
+
 ```
 
 
