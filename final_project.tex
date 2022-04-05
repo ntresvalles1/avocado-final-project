@@ -1,0 +1,435 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Trends in Avocado Prices},
+  pdfauthor={Nicole Tresvalles \& Karen Galvan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Trends in Avocado Prices}
+\author{Nicole Tresvalles \& Karen Galvan}
+\date{Last updated on 2022-04-05}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\includegraphics[width=1\linewidth]{https://images.squarespace-cdn.com/content/v1/5661b263e4b0830bdc162128/1531234150802-7M3VMHK28W1T2DF5POZN/5901c94f2600001700c47fbc}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+For this final project, we are interested in the the trends in Hass
+Avocado sales in different regions of the US and how sales change over
+time. According to the USDA, the United States has tripled their per
+capita consumption of avocados since the early 2000's, with about 95\%
+of avocados sold being Hass avocados. Along with its taste, size, and
+longer shelf life, Hass avocados have had greater growing yield in
+certain regions\footnote{Global hass avocado market: 2022 - 27: Industry
+  share, size, growth. Global Hass Avocado Market \textbar{} 2022 - 27
+  \textbar{} Industry Share, Size, Growth - Mordor Intelligence. (n.d.).
+  Retrieved March 9, 2022, from
+  \href{https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market\#:~:text=In\%20the\%20United\%20States\%2C\%20per,many\%20countries\%20across\%20the\%20globe}{here}.}.
+The information under the following dataset is directly reported by
+retailers describing the price of avocados and the amount they sell.
+We've filtered the dataset as to only include reports from the
+Northeast, West, and Plains regions of the US. In addition to region of
+avocado sales, the data we work with also provide information about
+date, year, total volume of avocado sales, as well as the type of
+avocado involved. The dataset reports that type differentiates organic
+and conventional avocados, which is determined the amount of detectable
+levels of pesticides residue.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{exploratory-data-analysis}{%
+\section{Exploratory data analysis}\label{exploratory-data-analysis}}
+
+\hypertarget{describe-data}{%
+\subsection{Describe data}\label{describe-data}}
+
+Give people a sense for your data by describing:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What each observation in each row corresponds to: Each observation
+  corresponds to the average price of a single avocado being sold in a
+  given date and region.
+\item
+  Sample size: There's a total of 18,259 observations included in the
+  dataset
+\item
+  Outcome variable \(y\): The average price of an avocado
+\item
+  Numerical explanatory variable \(x_1\): Total volume of avocados sold
+\item
+  Categorical explanatory variable \(x_2\) and what the \(k\)
+  levels/categories are: Date and year of observation, Region of the
+  observation (which has 6 categories), type of avocado
+  (organic/conventional)
+\item
+  Display a snapshot of five randomly chosen rows of data
+\end{enumerate}
+
+\begin{verbatim}
+## # A tibble: 5 x 6
+##   Date       AveragePrice Total.Volume type          year region   
+##   <date>            <dbl>        <dbl> <chr>        <dbl> <chr>    
+## 1 2018-02-11         1.11      617476. conventional  2018 Northeast
+## 2 2015-11-08         1.12     1285587. conventional  2015 Plains   
+## 3 2018-03-18         1.34     4621126. conventional  2018 Northeast
+## 4 2016-08-21         1.82      144812. organic       2016 West     
+## 5 2017-03-19         1.43      380613. conventional  2017 Northeast
+\end{verbatim}
+
+\hypertarget{summary-statistics}{%
+\subsection{Summary statistics}\label{summary-statistics}}
+
+\begin{verbatim}
+## # A tibble: 2 x 7
+##   term      estimate std_error statistic p_value lower_ci upper_ci
+##   <chr>        <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
+## 1 intercept  -64.8       20.7      -3.13   0.002 -105.     -24.2  
+## 2 year         0.033      0.01      3.20   0.001    0.013    0.053
+\end{verbatim}
+
+\begin{verbatim}
+## # A tibble: 3 x 7
+##   term           estimate std_error statistic p_value lower_ci upper_ci
+##   <chr>             <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
+## 1 intercept         1.54      0.013    118.         0    1.51     1.56 
+## 2 region: Plains   -0.103     0.023     -4.57       0   -0.147   -0.059
+## 3 region: West     -0.267     0.023    -11.8        0   -0.312   -0.223
+\end{verbatim}
+
+\hypertarget{data-visualizations}{%
+\subsection{Data visualizations}\label{data-visualizations}}
+
+\begin{figure}
+
+{\centering \includegraphics{final_project_files/figure-latex/unnamed-chunk-8-1} 
+
+}
+
+\caption{Figure 1: Types of Avocado Average Prices in 2016}\label{fig:unnamed-chunk-8}
+\end{figure}
+
+The median average price for organic avocados in 2016 is much greater
+than the median average price for conventional avocados. The
+approximated difference seems to be \$0.50.
+
+\begin{figure}
+
+{\centering \includegraphics{final_project_files/figure-latex/unnamed-chunk-9-1} 
+
+}
+
+\caption{Figure 2: Avocado Average Prices in 2016}\label{fig:unnamed-chunk-9}
+\end{figure}
+
+Consistently across all regions in 2016, the average price of an organic
+avocado is greater than its conventional counter part. Specifically, the
+Northeast and Plains regions seem to have stronger correlation
+coefficients than their counterpart.
+
+\begin{figure}
+
+{\centering \includegraphics{final_project_files/figure-latex/unnamed-chunk-10-1} 
+
+}
+
+\caption{Figure 3: Total Volume of Avocado Sold in 2016}\label{fig:unnamed-chunk-10}
+\end{figure}
+
+The median average price of avocados sold in 2016 seems to be much lower
+in the West than in other regions of the US, with the Northeast having
+the highest median average price.
+
+\begin{figure}
+
+{\centering \includegraphics{final_project_files/figure-latex/unnamed-chunk-11-1} 
+
+}
+
+\caption{Figure 4: Average Price of Total Volume Sold in 2016 (Interaction)}\label{fig:unnamed-chunk-11}
+\end{figure}
+
+\begin{verbatim}
+## # A tibble: 6 x 7
+##   term                      estimate std_error statistic p_value lower_ci upper_ci
+##   <chr>                        <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
+## 1 intercept                    1.58      0.02      80.7    0        1.54     1.62 
+## 2 Total.Volume                 0         0         -8.14   0        0        0    
+## 3 region: Plains               0.07      0.038      1.82   0.069   -0.005    0.145
+## 4 region: West                -0.107     0.039     -2.77   0.006   -0.183   -0.031
+## 5 Total.Volume:regionPlains    0         0         -8.29   0        0        0    
+## 6 Total.Volume:regionWest      0         0         -1.10   0.271    0        0
+\end{verbatim}
+
+This visualization gives us the insight that the avocado prices in
+Northeast averages much higher per pound than avocados in other regions.
+Throughout the regions, as the total volume sold increases, the average
+price of the avocados decrease. A significant note is that in the
+Plains, the trend decreases much quicker compared to the other regions.
+
+\begin{figure}
+
+{\centering \includegraphics{final_project_files/figure-latex/unnamed-chunk-12-1} 
+
+}
+
+\caption{Figure 5: Average Price of Total Volume Sold in 2016 (Parallel)}\label{fig:unnamed-chunk-12}
+\end{figure}
+
+\begin{verbatim}
+## # A tibble: 4 x 7
+##   term           estimate std_error statistic p_value lower_ci upper_ci
+##   <chr>             <dbl>     <dbl>     <dbl>   <dbl>    <dbl>    <dbl>
+## 1 intercept          1.60     0.019     84.4    0        1.57     1.64 
+## 2 Total.Volume       0        0        -15.6    0        0        0    
+## 3 region: Plains    -0.14     0.031     -4.56   0       -0.2     -0.079
+## 4 region: West      -0.11     0.033     -3.32   0.001   -0.176   -0.045
+\end{verbatim}
+
+Like the previous model, this visualization gives us the insight that
+the avocado prices in Northeast averages higher per pound than avocados
+in other regions, followed by avocados in the West, Midsouth, South
+East, the Plains, and Northern New England. Furthermore, as the total
+volume of avocados sold increases, the average price decreases.
+
+\hypertarget{initial-conclusions}{%
+\subsection{Initial conclusions}\label{initial-conclusions}}
+
+Write:
+
+\begin{itemize}
+\tightlist
+\item
+  What insight you would tell your grandmother
+\item
+  Your initial model selection choice, interaction or parallel slopes
+  model, and why.
+\end{itemize}
+
+From the initial glance at the visualizations, we conclude that organic
+avocados tend to consistently cost more on average across all the
+regions we highlighted. Furthermore, as the total volume of avocados
+sold increases, the average price gets less, which might be because of
+wholesale. As for the model selection, it seems like the parallel slopes
+model would be the best choice because it is easier to interpret. It has
+a lot less variation compared to the interaction model that has
+different intercepts and different slopes. Furthermore, the interaction
+model has additional complexity which can be seen by the additional rows
+in the interaction regression table.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{multiple-linear-regression}{%
+\section{Multiple linear regression}\label{multiple-linear-regression}}
+
+\hypertarget{regression-table}{%
+\subsection{Regression table}\label{regression-table}}
+
+Instructions:
+
+\begin{itemize}
+\tightlist
+\item
+  Indicate which model you selected: parallel slopes or interaction.
+\item
+  Fit your selected regression model and display the regression table in
+  the code block below
+\item
+  Modify the template formula below from ModernDive 6.1.2 to match your
+  model (this formula is written in the LaTeX typesetting language for
+  printing mathematical formulas)
+\end{itemize}
+
+\[
+\widehat{y} = 
+4.883 
+- 0.018 \cdot \text{age}  
+- 0.446 \cdot \mathbb{1}_{\text{is male}}(x)
++ 0.014 \cdot \text{age} \cdot \mathbb{1}_{\text{is male}}(x)
+\]
+
+\hypertarget{interpreting-regression-coefficients}{%
+\subsection{Interpreting regression
+coefficients}\label{interpreting-regression-coefficients}}
+
+Interpret all regressions coefficients in the \texttt{estimate} column
+in the following list:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Interpretation 1
+\item
+  Interpretation 2
+\item
+  \ldots{}
+\end{enumerate}
+
+\hypertarget{inference-for-multiple-regression}{%
+\subsection{Inference for multiple
+regression}\label{inference-for-multiple-regression}}
+
+\textbf{You will complete the rest of Section 3 at the project
+resubmission phase due the last day of exams.}
+
+From the above regression table, interpret the confidence interval and
+p-value for at least two non-intercept terms:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Interpretation 1
+\item
+  Interpretation 2
+\item
+  (optional) Interpretation 3
+\item
+  (optional) \ldots{}
+\end{enumerate}
+
+\hypertarget{conditions-for-inference-for-regression}{%
+\subsection{Conditions for inference for
+regression}\label{conditions-for-inference-for-regression}}
+
+Verify the \textbf{LINE} conditions for inference for regression for all
+confidence intervals and p-values from your regression table to have
+valid interpretation
+
+\hypertarget{linearity-of-relationship}{%
+\subsubsection{Linearity of
+relationship}\label{linearity-of-relationship}}
+
+\hypertarget{independence-of-residuals}{%
+\subsubsection{Independence of
+residuals}\label{independence-of-residuals}}
+
+\hypertarget{normality-of-residuals}{%
+\subsubsection{Normality of residuals}\label{normality-of-residuals}}
+
+\hypertarget{equality-of-variance}{%
+\subsubsection{Equality of variance}\label{equality-of-variance}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+\hypertarget{conclusions}{%
+\subsection{Conclusions}\label{conclusions}}
+
+\hypertarget{limitations}{%
+\subsection{Limitations}\label{limitations}}
+
+\hypertarget{further-questions}{%
+\subsection{Further questions}\label{further-questions}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{honor-code}{%
+\section{Honor code}\label{honor-code}}
+
+\hypertarget{project-peers}{%
+\subsection{Project peers}\label{project-peers}}
+
+Name all people who contributed in any way to this project (other than
+groupmates, Prof.~Kim, and Beth Brown): Not applicable
+
+\hypertarget{code-sources}{%
+\subsection{Code sources}\label{code-sources}}
+
+List any sources for coding matters you consulted in bullet point form
+(other than SDS 220 materials). For example, you can change the
+following list:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \href{https://www.datanovia.com/en/blog/ggplot-legend-title-position-and-labels/}{Labeling
+  legends in ggplot2}
+\item
+  \href{https://www.datasciencemadesimple.com/select-random-samples-r-dplyr-sample_n-sample_frac/\#:~:text=Dplyr\%20package\%20in\%20R\%20is,the\%20random\%20N\%25\%20of\%20rows.}{Randomly
+  sampling rows with dplyr}
+\item
+  \href{https://stackoverflow.com/questions/23564607/how-to-change-x-axis-tick-label-names-order-and-boxplot-colour-using-r-ggplot}{Changing
+  x-label tick marks}
+\end{enumerate}
+
+\hypertarget{citations-and-references}{%
+\subsection{Citations and References}\label{citations-and-references}}
+
+Ensure all in-text citations (if any) show up here using RMarkdown
+footnotes as seen in the Introduction:
+
+\end{document}
