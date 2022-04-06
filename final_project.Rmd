@@ -219,15 +219,15 @@ We selected the interaction model, as there are slopes of the lines in the plots
 # Insert code to fit your regression model and show the regression table. 
 
 # Fit regression model:
-avocado_model_parallel_slopes <- lm(AveragePrice ~ Total.Volume + region, data = avocado_data_2016)
+avocado_model_interaction <- lm(AveragePrice ~ Total.Volume * region, data = avocado_data_2016)
 # Get regression table:
-get_regression_table(avocado_model_parallel_slopes)  
+get_regression_table(avocado_model_interaction)  
 
 ```
 
 $$
 \widehat{y} = 
-1.603 
+1.58195 
 + -7.57343e^{-8} \cdot \text{total_volume}  
 + 0.06963 \cdot \mathbb{1}_{\text{is Plains}}(x)
 - 0.10706 \cdot \mathbb{1}_{\text{is West}}(x)
