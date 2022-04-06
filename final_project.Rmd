@@ -51,7 +51,7 @@ include_graphics("https://images.squarespace-cdn.com/content/v1/5661b263e4b0830b
 
 # Introduction 
 
-For this final project, we are interested in the the trends in Hass Avocado sales in different regions of the US and how sales change over time. According to the USDA, the United States has tripled their per capita consumption of avocados  since the early 2000’s, with about 95% of avocados sold being Hass avocados. Along with its taste, size, and longer shelf life, Hass avocados have had greater growing yield in certain regions^[Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022, from [here](https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe).]. The information under the following dataset is directly reported by retailers describing the price of avocados and the amount they sell. We've filtered the dataset as to only include reports from the Northeast, West, and Plains regions of the US. In addition to region of avocado sales, the data we work with also provide information about date, year, total volume of avocado sales, as well as the type of avocado involved. The dataset reports that type differentiates organic and conventional avocados, which is determined the amount of detectable levels of pesticides residue. 
+For this final project, we are interested in the the trends in Hass Avocado sales in different regions of the US and how sales change over time. According to the USDA, the United States has tripled their per capita consumption of avocados  since the early 2000’s, with about 95% of avocados sold being Hass avocados. Along with its taste, size, and longer shelf life, Hass avocados have had greater growing yield in certain regions^[Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022 [here](https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe)]. The information under the following dataset is directly reported by retailers describing the price of avocados and the amount they sell. We've filtered the dataset as to only include reports from the Northeast, West, and Plains regions of the US. In addition to region of avocado sales, the data we work with also provide information about date, year, total volume of avocado sales, as well as the type of avocado involved. The dataset reports that type differentiates organic and conventional avocados, which is determined the amount of detectable levels of pesticides residue. 
 
 ***
 
@@ -213,7 +213,7 @@ block below
 - Modify the template formula below from ModernDive 6.1.2 to match your model (this formula is written in the LaTeX typesetting language for printing mathematical formulas)
 
 
-We selected the interaction model, as there are slopes of the lines in the plots of the interaction model that we believe merits the additional complexity.
+We selected the interaction model, as there are slopes of the lines in the plots of the interaction model that we believe merits the additional complexity. There is a significant difference between the interaction and parallel slopes model graphs, especially with the Plains regression line.  
 
 ```{r}
 # Insert code to fit your regression model and show the regression table. 
@@ -225,25 +225,35 @@ get_regression_table(avocado_model_interaction)
 
 ```
 
-$$
-\widehat{y} = 
-1.58195 
-+ -7.57343e^{-8} \cdot \text{total_volume}  
-+ 0.06963 \cdot \mathbb{1}_{\text{is Plains}}(x)
-- 0.10706 \cdot \mathbb{1}_{\text{is West}}(x)
-- 2.23568^{-7} \cdot \text{total_volume} \cdot \mathbb{1}_{\text{is Plains}}(x)
-- 1.30082^{-8} \cdot \text{total_volume} \cdot \mathbb{1}_{\text{is West}}(x)
 
-$$
+\begin{equation} 
+\begin{split}
+
+\widehat{y} &= 1.58195 \\
+&+ (-7.57343e^{-8}) \times \text{total_volume}\\
+&+ 0.06963 \times \mathbb{1}_{\text{is Plains}}(x) \\
+&- 0.10706 \times \mathbb{1}_{\text{is West}}(x) \\
+&- 2.23568e^{-7} \times \text{total_volume} \times \mathbb{1}_{\text{is Plains}}(x) \\
+&- 1.30082e^{-8} \times \text{total_volume} \cdot \mathbb{1}_{\text{is West}}(x)
+
+
+\end{split} 
+\end{equation} 
+
 
 
 ## Interpreting regression coefficients
 
 Interpret all regressions coefficients in the `estimate` column in the following list:
 
-1. Interpretation 1
-1. Interpretation 2
-1. ...
+For all the slopes, the values are incredibly small since to calculate the slope it would be y/x. Since we are mapping price to y and total volume to x. The avocados in our dataset are worth a maximum $3, while the total volume is millions. Thus, the denominator is significantly larger, making our values for the slopes small.  
+
+The intercept term corresponds to the mean average price of avocados of $1.58 in the Northeast. The Total.Volume term corresponds to the slope for the Northeast. For every increase of 1 unit in total volume, there is the associated decrease of on average 7.57343e^{-8} dollars of average price. However, while there is a value, it is negative and therefore only has a mathematical interpretation and no practical one. 
+
+The region: Plains term corresponds to the offset in intercept for the Plains relative to the Northeast. Thus, the avocados in the Plains have, on average, $0.06963 of a difference in average price. The Total.Volume:regionPlains term corresponds to the offset in slope for the avocados in the Plains. Thus, for every increase of 1 unit in total volume, there is the associated decrease of on average 2.23568e^(-7) dollars of a difference of average price. However, while there is a value, it is negative and therefore only has a mathematical interpretation and no practical one. 
+
+The region: West term corresponds to the offset in intercept for the West relative to the Northeast. Thus, the avocados in the West have, on average, $0.10706 of a difference in average price. The Total.Volume:regionWest term corresponds to the offset in slope for the avocados in the West. Thus, for every increase of 1 unit in total volume, there is the associated decrease of on average 1.30082e^(-8) dollars of a difference of average price. However, while there is a value, it is negative and therefore only has a mathematical interpretation and no practical one. 
+
 
 
 ## Inference for multiple regression
@@ -331,3 +341,4 @@ List any sources for coding matters you consulted in bullet point form (other th
 ## Citations and References
 
 Ensure all in-text citations (if any) show up here using RMarkdown footnotes as seen in the Introduction:
+
