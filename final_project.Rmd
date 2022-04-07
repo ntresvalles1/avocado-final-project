@@ -146,7 +146,7 @@ ggplot(avocado_data_2016, aes(y = AveragePrice, x = region)) +
        y = "Average Price", 
        title = "Total Volume of Avocados Sold in 2016 (by region)") +
   scale_y_continuous(labels = scales::comma) +
-  scale_x_discrete(labels=c("Midsouth","Northeast","New England","Plains","Southeast","West")) 
+  scale_x_discrete(labels=c("Northeast","Plains","West")) 
 ```
 
 The median average price of avocados sold in 2016 seems to be much lower in the West than in other regions of the US, with the Northeast having the highest median average price.
@@ -185,7 +185,7 @@ ggplot(avocado_mutated, aes(x = total_vol_mil, y = AveragePrice, color = region)
   
 ```
 
-Like the previous model, this visualization gives us the insight that the avocado prices in Northeast averages higher per pound than avocados in other regions, followed by avocados in the West, Midsouth, South East, the Plains, and Northern New England. Furthermore, as the total volume of avocados sold increases, the average price decreases.  
+Like the previous model, this visualization gives us the insight that the avocado prices in Northeast averages higher per pound than avocados in other regions, followed by avocados in the West and the Plains. Furthermore, as the total volume of avocados sold increases, the average price decreases.  
 
 ## Initial conclusions
 
