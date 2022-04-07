@@ -194,7 +194,7 @@ Write:
 - What insight you would tell your grandmother
 - Your initial model selection choice, interaction or parallel slopes model, and why.
 
-From the initial glance at the visualizations, we conclude that organic avocados tend to consistently cost more on average across all the regions we highlighted. Furthermore, as the total volume of avocados sold increases, the average price gets less, which might be because of wholesale. As for the model selection, it seems like the parallel slopes model would be the best choice because it is easier to interpret. It has a lot less variation compared to the interaction model that has different intercepts and different slopes. Furthermore, the interaction model has additional complexity which can be seen by the additional rows in the interaction regression table.  
+From the initial glance at the visualizations, we conclude that organic avocados tend to consistently cost more on average across all the regions we highlighted. Furthermore, as the total volume of avocados sold increases, the average price gets less, which might be as a result of wholesale. As for the model selection, it seems like the interaction model would be the best choice since it contains variation compared to the parallel slopes model. Furthermore, the interaction model has additional complexity which can be seen by the additional rows in the interaction regression table, especially with the regression line of the Plains. Thus, we believe the interaction model is a much better representation of the dataset.   
 
 
 
