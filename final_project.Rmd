@@ -264,26 +264,47 @@ Verify the **LINE** conditions for inference for regression for all confidence i
 your regression table to have valid interpretation
 
 ### Linearity of relationship
+The relationship between total volume and average price appears to be negative and linear. 
 
 ### Independence of residuals
+The observations in our data must be independent of one another. In this data, we can not be sure this is the case, for example,  the avocados can be counted when multiple units are in a bag. Although it was told that the retail scan data comes directly from retailers’ cash registers based on actual retail sales of Hass avocados, we believe that we are not given enough information to verify this condition has been met.
 
 ### Normality of residuals
 
-```{r, fig.cap = "Figure 6: INSERT TITLE", fig.align = "center"}
-# Insert code to visualize the distribution of the residuals:
+```{r, fig.cap = "Figure 6: Histogram of Residuals", fig.align = "center"}
+# Code to visualize the distribution of the residuals:
+regression_points <- get_regression_points(avocado_model_interaction)
+
+ggplot(regression_points, aes(x = residual)) +
+  geom_histogram(color = "white") +
+  labs(x = "Residual", y = "Count")
 ```
+From the histogram above, this model does meet the normality of residuals condition, as it appears to be a (roughly) normal distribution.
+
+
+
 
 ### Equality of variance
 
-```{r, fig.cap = "Figure 6: INSERT TITLE", fig.align = "center"}
-# Insert code to visualize the relationship between the residuals and your
+```{r, fig.cap = "Figure 6: Plot of Residuals over Total Volume", fig.align = "center"}
+# Code to visualize the relationship between the residuals and your
 # numerical explanatory/categorical variable:
+ggplot(regression_points, aes(x = total_vol_mil, y = residual)) +
+  geom_point() +
+  labs(x = "Total Volume (in millions)", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1)
 ```
 
 ```{r, fig.cap = "Figure 7: INSERT TITLE", fig.align = "center"}
-# Insert code to visualize the relationship between the residuals and your
+# Code to visualize the relationship between the residuals and your
 # categorical explanatory/categorical variable:
+ggplot(regression_points, aes(x = region, y = residual)) +
+  geom_point() +
+  labs(x = "Total Volume (in millions)", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1)
+
 ```
+From both graphs, we observe that the spread of the residuals increases as the value of total volume increases. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
 
 
 ***
@@ -301,6 +322,9 @@ your regression table to have valid interpretation
 # Discussion 
 
 ## Conclusions
+From our initial conclusions, 
+
+
 
 
 ## Limitations
