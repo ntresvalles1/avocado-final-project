@@ -58,7 +58,7 @@ For this final project, we are interested in the the trends in Hass Avocado sale
 # Exploratory data analysis
 
 ```{r}
-# Change this code to load your CSV file from the web and do any data cleaning here:
+# Code to load CSV file and data cleaning:
 avocado_data <- read_csv("https://wjhopper.github.io/SDS-201/data/avocados.csv") %>% 
   # Select only the needed variables:
   select(-XLarge.Bags) %>% 
@@ -66,10 +66,8 @@ avocado_data <- read_csv("https://wjhopper.github.io/SDS-201/data/avocados.csv")
   # Drop rows with missing data for crashes
   filter(region == "Northeast"|
           region == "West" | region == "Plains" ) %>% 
+  filter(year == 2016) %>% 
   select(-large_hass_sold, -small_hass_sold, -xlarage_hass_sold, -Total.Bags, -Small.Bags, -Large.Bags)
-
-avocado_data_2016 <- avocado_data %>% 
-  filter(year == 2016)
 ```
 
 
@@ -86,7 +84,7 @@ Give people a sense for your data by describing:
 
 
 ```{r}
-# Change this code to show a random sample of 5 rows of the data:
+# Show a random sample of 5 rows of the data:
 avocado_data %>% 
   sample_n(5)
 ```
@@ -95,14 +93,14 @@ avocado_data %>%
 ## Summary statistics
 
 ```{r}
-# Insert code to output a table of summary statistics:
+# Code to output a table of summary statistics:
 avocado_model <- lm(AveragePrice ~ year, data = avocado_data)
 get_regression_table(avocado_model)
 ```
 
 
 ```{r}
-# Insert code to output a table of summary statistics, but this time
+# Code to output a table of summary statistics, but this time
 # split by the different levels of the categorical variable:
 avocado_mod_categorical <- lm(AveragePrice ~ region, data = avocado_data)
 get_regression_table(avocado_mod_categorical)
@@ -113,8 +111,8 @@ get_regression_table(avocado_mod_categorical)
 ## Data visualizations
 
 ```{r, fig.cap = "Figure 1: Types of Avocado Average Prices in 2016", fig.align = "center"}
-# Insert code to visualize the distribution of outcome variable:
-ggplot(avocado_data_2016, aes(x = factor(type), y = AveragePrice)) +
+# Code to visualize the distribution of outcome variable:
+ggplot(avocado_data, aes(x = factor(type), y = AveragePrice)) +
   geom_boxplot() +
   labs(x = "Type of Avocado", 
        y = "Average Price", 
@@ -125,8 +123,8 @@ ggplot(avocado_data_2016, aes(x = factor(type), y = AveragePrice)) +
 The median average price for organic avocados in 2016 is much greater than the median average price for conventional avocados. The approximated difference seems to be $0.50. 
 
 ```{r, fig.cap = "Figure 2: Avocado Average Prices in 2016", fig.align = "center"}
-# Insert code to visualize the relationship between outcome variable and numerical explanatory variable:
-ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date, color = type)) +
+# Code to visualize the relationship between outcome variable and numerical explanatory variable:
+ggplot(avocado_data, aes(y = AveragePrice, x = Date, color = type)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) + 
   theme(axis.text.x=element_text(angle=60, hjust=1))+
@@ -139,8 +137,8 @@ ggplot(avocado_data_2016, aes(y = AveragePrice, x = Date, color = type)) +
 Consistently across all regions in 2016, the average price of an organic avocado is greater than its conventional counter part. Specifically, the Northeast and Plains regions seem to have stronger correlation coefficients than their counterpart.
 
 ```{r, fig.cap = "Figure 3: Total Volume of Avocado Sold in 2016", fig.align = "center"}
-# Insert code to visualize the relationship between outcome variable and categorical explanatory variable:
-ggplot(avocado_data_2016, aes(y = AveragePrice, x = region)) +
+# Code to visualize the relationship between outcome variable and categorical explanatory variable:
+ggplot(avocado_data, aes(y = AveragePrice, x = region)) +
   geom_boxplot() +
   labs(x = "Region", 
        y = "Average Price", 
@@ -153,29 +151,22 @@ The median average price of avocados sold in 2016 seems to be much lower in the 
 
 ```{r, fig.cap = "Figure 4: Average Price of Total Volume Sold in 2016 (Interaction)", fig.align = "center"}
 # Code to mutate total volume: 
-avocado_mutated <- avocado_data_2016 %>% 
+avocado_mutated <- avocado_data %>% 
   mutate(total_vol_mil = Total.Volume/1000000)
 
-# Insert code to visualize interaction model:
+# Code to visualize interaction model:
 ggplot(avocado_mutated, aes(x = total_vol_mil, y = AveragePrice, color = region)) +
   geom_point() +
   labs(x = "Total Volume (in millions)", y = "Average Price", color = "Region", 
        title = "Average Price of Total Volume of Avocados Sold in 2016 (by region)") +
   geom_smooth(method = "lm", se = FALSE) +
   scale_x_continuous(labels = scales::comma)
-
-# Fit regression model:
-#avocado_model_interaction <- lm(AveragePrice ~ Total.Volume * region, data = avocado_data_2016)
-
-# Get regression table:
-#get_regression_table(avocado_model_interaction)
-
 ```
 
 This visualization gives us the insight that the avocado prices in Northeast averages much higher per pound than avocados in other regions. Throughout the regions, as the total volume sold increases, the average price of the avocados decrease. A significant note is that in the Plains, the trend decreases much quicker compared to the other regions. 
 
 ```{r, fig.cap = "Figure 5: Average Price of Total Volume Sold in 2016 (Parallel)", fig.align = "center"}
-# Insert code to visualize parallel slopes model:
+# Code to visualize parallel slopes model:
 ggplot(avocado_mutated, aes(x = total_vol_mil, y = AveragePrice, color = region)) +
   geom_point() +
   labs(x = "Total Volume (in millions)", y = "Average Price", color = "Region", 
@@ -249,9 +240,9 @@ For all the slopes, the values are incredibly small since to calculate the slope
 
 The intercept term corresponds to the mean average price of avocados of 1.58 dollars in the Northeast. The Total.Volume term corresponds to the slope for the Northeast. For every increase of 1 unit in total volume, there is the associated decrease of on average $0.0757 dollars of average price. This means that in the Northeast, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale). 
 
-The region: Plains term corresponds to the offset in intercept for the Plains relative to the Northeast. Thus, the avocados in the Plains have, on average, 0.0696 dollars of a difference in average price. The Total.Volume:regionPlains term corresponds to the offset in slope for the avocados in the Plains. Thus, for every increase of 1 unit in total volume, there is the associated decrease of on average $0.2236 of a difference of average price. This means that in the Plains, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale).
+The region: Plains term corresponds to the offset in intercept for the Plains relative to the Northeast. Thus, the avocados in the Plains have, on average, 0.0696 dollars of a difference in average price, when total volume is 0. However, the average difference in price changes as total volume increases. The Total.Volume:regionPlains term corresponds to the offset in slope for the avocados in the Plains. Thus, for every increase of 1 unit in total volume, there is the decrease in slope relative to the baseline Northeast slope of on average $0.2236. This means that in the Plains, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale).
 
-The region: West term corresponds to the offset in intercept for the West relative to the Northeast. Thus, the avocados in the West have, on average, 0.1071 dollars of a difference in average price. The Total.Volume:regionWest term corresponds to the offset in slope for the avocados in the West. Thus, for every increase of 1 unit in total volume, there is the associated decrease of on average $0.0130 of a difference of average price. This means that in the West, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale).
+The region: West term corresponds to the offset in intercept for the West relative to the Northeast. Thus, the avocados in the West have, on average, 0.1071 dollars of a difference in average price, when total volume is 0. However, the average difference in price changes as total volume increases. The Total.Volume:regionWest term corresponds to the offset in slope for the avocados in the West. Thus, for every increase of 1 unit in total volume, there is the decrease in slope relative to the baseline Northeast slope of on average $0.0130. This means that in the West, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale).
 
 
 
