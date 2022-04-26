@@ -298,13 +298,13 @@ ggplot(regression_points, aes(x = total_vol_mil, y = residual)) +
 ```{r, fig.cap = "Figure 7: INSERT TITLE", fig.align = "center"}
 # Code to visualize the relationship between the residuals and your
 # categorical explanatory/categorical variable:
-ggplot(regression_points, aes(x = region, y = residual)) +
+ggplot(regression_points, aes(x = total_vol_mil, y = residual, color = region)) +
   geom_point() +
   labs(x = "Total Volume (in millions)", y = "Residual") +
   geom_hline(yintercept = 0, col = "blue", size = 1)
 
 ```
-From both graphs, we observe that the spread of the residuals increases as the value of total volume increases. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
+From both graphs, we observe that the spread of the residuals increases as the value of total volume increases. This does not fulfill the condition since there is not equal variance across all values of the explanatory variable, total volume. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
 
 
 ***
