@@ -297,7 +297,7 @@ ggplot(regression_points, aes(x = total_vol_mil, y = residual)) +
   geom_hline(yintercept = 0, col = "blue", size = 1)
 ```
 
-```{r, fig.cap = "Figure 7: INSERT TITLE", fig.align = "center"}
+```{r, fig.cap = "Figure 7: Plot of Residuals over Total Volume by Region", fig.align = "center"}
 # Code to visualize the relationship between the residuals and your
 # categorical explanatory/categorical variable:
 ggplot(regression_points, aes(x = total_vol_mil, y = residual, color = region)) +
@@ -305,6 +305,17 @@ ggplot(regression_points, aes(x = total_vol_mil, y = residual, color = region)) 
   labs(x = "Total Volume (in millions)", y = "Residual") +
   geom_hline(yintercept = 0, col = "blue", size = 1)
 
+```
+
+```{r, fig.cap = "Figure 8: Boxplot of Residuals for Each Region", fig.align = "center"}
+# Code to visualize the relationship between the residuals and your
+# categorical explanatory/categorical variable:
+ggplot(regression_points, aes(x = region, y = residual, fill=region)) +
+  geom_boxplot() +
+  labs(x = "Region", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1) +
+  theme(legend.position="none") +
+  scale_fill_brewer(palette="BuPu")
 ```
 From both graphs, we observe that the spread of the residuals increases as the value of total volume increases. This does not fulfill the condition since there is not equal variance across all values of the explanatory variable, total volume. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
 
@@ -353,6 +364,7 @@ List any sources for coding matters you consulted in bullet point form (other th
 1. [Labeling legends in ggplot2](https://www.datanovia.com/en/blog/ggplot-legend-title-position-and-labels/)
 1. [Randomly sampling rows with dplyr](https://www.datasciencemadesimple.com/select-random-samples-r-dplyr-sample_n-sample_frac/#:~:text=Dplyr%20package%20in%20R%20is,the%20random%20N%25%20of%20rows.)
 1. [Changing x-label tick marks](https://stackoverflow.com/questions/23564607/how-to-change-x-axis-tick-label-names-order-and-boxplot-colour-using-r-ggplot)
+1. [Control ggplot2 boxplot colors](https://r-graph-gallery.com/264-control-ggplot2-boxplot-colors.html)
 
 ## Citations and References
 
