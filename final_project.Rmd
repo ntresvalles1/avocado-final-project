@@ -252,11 +252,11 @@ The region: West term corresponds to the offset in intercept for the West relati
 From the above regression table, interpret the confidence interval and p-value for at least two non-intercept terms:
 
 1. Interpretation 1
-The confidence intervals for the average slope for the total volume (in millions) of the Northeast region is (-0.089, -0.067), meaning that we can be 95% confident that this population parameter is between -0.089 and -0.067. 
+The confidence intervals for the average slope for the total volume (in millions) of the Northeast region is (-0.094, -0.057), meaning that we can be 95% confident that this population parameter is between -0.094 and -0.057. 
 
 1. Interpretation 2
 
-The confidence intervals for the difference in average slope for the total volume (in millions) of the Plains region is (-0.261, -0.198), meaning that we can be 95% confident that the difference in average slope is between -0.261 and -0.198. 
+The confidence intervals for the difference in average slope for the total volume (in millions) of the Plains region is (-0.277, -0.171), meaning that we can be 95% confident that the difference in average slope is between -0.277 and -0.171. 
 
 
 ## Conditions for inference for regression
