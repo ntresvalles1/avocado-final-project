@@ -34,7 +34,6 @@ library(knitr)
 library(tidyverse)
 
 # Add any additionally needed packages here:
-
 ```
 
 
@@ -278,10 +277,10 @@ The observations in our data must be independent of one another. In this data, w
 regression_points <- get_regression_points(avocado_model_interaction)
 
 ggplot(regression_points, aes(x = residual)) +
-  geom_histogram(color = "white") +
+  geom_histogram(bins= 30, color = "white") +
   labs(x = "Residual", y = "Count")
 ```
-From the histogram above, this model does meet the normality of residuals condition, as it appears to be a (roughly) normal distribution.
+From the histogram above, this model does not meet the normality of residuals condition, as the histogram doesn't appear to be a normal distribution. 
 
 
 
@@ -317,7 +316,7 @@ ggplot(regression_points, aes(x = region, y = residual, fill=region)) +
   theme(legend.position="none") +
   scale_fill_brewer(palette="BuPu")
 ```
-From both graphs, we observe that the spread of the residuals increases as the value of total volume increases. This does not fulfill the condition since there is not equal variance across all values of the explanatory variable, total volume. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
+From Fig 6 and Fig 7, we observe that the spread of the residuals increases as the value of total volume increases. Furthermore in Fig 8, comparing the spread/the IQR of each region's residuals, we see that they vary significantly. Therefore, this leads us to conclude that our regression model does not fulfill the condition since there is not equal variance across all values of the explanatory variable, total volume. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
 
 
 ***
