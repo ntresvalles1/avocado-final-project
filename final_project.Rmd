@@ -240,9 +240,9 @@ For all the slopes, the values are incredibly small since to calculate the slope
 
 The intercept term corresponds to the mean average price of avocados of 1.58 dollars in the Northeast. The Total.Volume term corresponds to the slope for the Northeast. For every increase of 1 unit in total volume, there is the associated decrease of on average $0.0757 dollars of average price. This means that in the Northeast, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale). 
 
-The region: Plains term corresponds to the offset in intercept for the Plains relative to the Northeast. Thus, the avocados in the Plains have, on average, 0.0696 dollars of a difference in average price, when total volume is 0. However, the average difference in price changes as total volume increases. The Total.Volume:regionPlains term corresponds to the offset in slope for the avocados in the Plains. Thus, for every increase of 1 unit in total volume, there is the decrease in slope relative to the baseline Northeast slope of on average $0.2236. This means that in the Plains, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale).
+The region: Plains term corresponds to the offset in intercept for the Plains relative to the Northeast. Thus, the avocados in the Plains have, on average, 0.0696 dollars of a difference in average price, when total volume is 0. However, the average difference in price changes as total volume increases. The Total.Volume:regionPlains term corresponds to the offset in slope for the avocados in the Plains. Thus, for every increase of 1 unit in total volume, there is the associated decrease in average price relative to the baseline, Northeast, of on average $0.2236. This means that in the Plains, as one buys more avocados, the average price for each decreases by 0.3 dollars. For the reasons of this, we think it could be due to wholesale purchases. 
 
-The region: West term corresponds to the offset in intercept for the West relative to the Northeast. Thus, the avocados in the West have, on average, 0.1071 dollars of a difference in average price, when total volume is 0. However, the average difference in price changes as total volume increases. The Total.Volume:regionWest term corresponds to the offset in slope for the avocados in the West. Thus, for every increase of 1 unit in total volume, there is the decrease in slope relative to the baseline Northeast slope of on average $0.0130. This means that in the West, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale).
+The region: West term corresponds to the offset in intercept for the West relative to the Northeast. Thus, the avocados in the West have, on average, 0.1071 dollars of a difference in average price, when total volume is 0. However, the average difference in price changes as total volume increases. The Total.Volume:regionWest term corresponds to the offset in slope for the avocados in the West. Thus, for every increase of 1 unit in total volume, there is the associated decrease in average price relative to the baseline, Northeast, of on average $0.0130. This means that in the West, as one buys more avocados, the average price for each decreases by 0.089 dollars (a reason could be due to wholesale purchases).
 
 
 
@@ -266,26 +266,47 @@ Verify the **LINE** conditions for inference for regression for all confidence i
 your regression table to have valid interpretation
 
 ### Linearity of relationship
+The relationship between total volume and average price appears to be negative and linear. 
 
 ### Independence of residuals
+The observations in our data must be independent of one another. In this data, we can not be sure this is the case, for example,  the avocados can be counted when multiple units are in a bag. Although it was told that the retail scan data comes directly from retailers’ cash registers based on actual retail sales of Hass avocados, we believe that we are not given enough information to verify this condition has been met.
 
 ### Normality of residuals
 
-```{r, fig.cap = "Figure 6: INSERT TITLE", fig.align = "center"}
-# Insert code to visualize the distribution of the residuals:
+```{r, fig.cap = "Figure 6: Histogram of Residuals", fig.align = "center"}
+# Code to visualize the distribution of the residuals:
+regression_points <- get_regression_points(avocado_model_interaction)
+
+ggplot(regression_points, aes(x = residual)) +
+  geom_histogram(color = "white") +
+  labs(x = "Residual", y = "Count")
 ```
+From the histogram above, this model does meet the normality of residuals condition, as it appears to be a (roughly) normal distribution.
+
+
+
 
 ### Equality of variance
 
-```{r, fig.cap = "Figure 6: INSERT TITLE", fig.align = "center"}
-# Insert code to visualize the relationship between the residuals and your
+```{r, fig.cap = "Figure 6: Plot of Residuals over Total Volume", fig.align = "center"}
+# Code to visualize the relationship between the residuals and your
 # numerical explanatory/categorical variable:
+ggplot(regression_points, aes(x = total_vol_mil, y = residual)) +
+  geom_point() +
+  labs(x = "Total Volume (in millions)", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1)
 ```
 
 ```{r, fig.cap = "Figure 7: INSERT TITLE", fig.align = "center"}
-# Insert code to visualize the relationship between the residuals and your
+# Code to visualize the relationship between the residuals and your
 # categorical explanatory/categorical variable:
+ggplot(regression_points, aes(x = total_vol_mil, y = residual, color = region)) +
+  geom_point() +
+  labs(x = "Total Volume (in millions)", y = "Residual") +
+  geom_hline(yintercept = 0, col = "blue", size = 1)
+
 ```
+From both graphs, we observe that the spread of the residuals increases as the value of total volume increases. This does not fulfill the condition since there is not equal variance across all values of the explanatory variable, total volume. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
 
 
 ***
@@ -303,6 +324,9 @@ your regression table to have valid interpretation
 # Discussion 
 
 ## Conclusions
+From our initial conclusions, 
+
+
 
 
 ## Limitations
