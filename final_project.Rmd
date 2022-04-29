@@ -326,6 +326,7 @@ Lastly, our dataset is limited to Hass avocados, which is only one specific type
 ## Further questions
 If we were to continue researching this topic, we would first want more information about the data. Specifically what unit the total volume is, as there was no documentation given. Knowing the units would give us more context about the data and give us more specific interpretations, rather than just calling it "total volume". 
 Next, we would like to know the process behind collecting data on city, state and region level. Because knowing this reason would gives us more clarification about the independence of residuals-- so we could see if it meets this condition.
+
 As for further analysis, we want to maybe look into look at how season affects avocado sales across regions. This would hopefully give us a more fruitful result compared to the one we got here. Since our results weren't too helpful in giving us an answer to our question, it would be interesting to have a dataset that would give us some insight on our research question. 
 
 
@@ -337,7 +338,7 @@ As for further analysis, we want to maybe look into look at how season affects a
 
 ## Project peers
 
-Name all people who contributed in any way to this project (other than groupmates, Prof. Kim, and Beth Brown): Not applicable
+Name all people who contributed in any way to this project (other than groupmates, Prof. Kim, and Beth Brown): Emma (TA)
 
 ## Code sources
 
