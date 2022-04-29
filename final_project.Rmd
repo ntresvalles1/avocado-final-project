@@ -50,7 +50,7 @@ include_graphics("https://images.squarespace-cdn.com/content/v1/5661b263e4b0830b
 
 # Introduction 
 
-For this final project, we are interested in the the trends in Hass Avocado sales in different regions of the US and how sales change over time. According to the USDA, the United States has tripled their per capita consumption of avocados  since the early 2000’s, with about 95% of avocados sold being Hass avocados. Along with its taste, size, and longer shelf life, Hass avocados have had greater growing yield in certain regions^[Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022 [here](https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe)]. The information under the following dataset is directly reported by retailers describing the price of avocados and the amount they sell. We've filtered the dataset as to only include reports from the Northeast, West, and Plains regions of the US. In addition to region of avocado sales, the data we work with also provide information about date, year, total volume of avocado sales, as well as the type of avocado involved. The dataset reports that type differentiates organic and conventional avocados, which is determined the amount of detectable levels of pesticides residue. 
+For this final project, we are interested in the the trends in Hass Avocado sales in the US in 2016 and how they differentiate in specific regions. According to the USDA, the United States has tripled their per capita consumption of avocados  since the early 2000’s, with about 95% of avocados sold being Hass avocados. Along with its taste, size, and longer shelf life, Hass avocados have had greater growing yield in certain regions^[Global hass avocado market: 2022 - 27: Industry share, size, growth. Global Hass Avocado Market | 2022 - 27 | Industry Share, Size, Growth - Mordor Intelligence. (n.d.). Retrieved March 9, 2022 [here](https://www.mordorintelligence.com/industry-reports/global-hass-avocado-market#:~:text=In%20the%20United%20States%2C%20per,many%20countries%20across%20the%20globe)]. The information under the following dataset is directly reported by retailers describing the price of avocados and the amount they sell. We've filtered the dataset as to only include reports from the Northeast, West, and Plains regions of the US. In addition to region of avocado sales, the data we work with also provide information about date, year, total volume of avocado sales, as well as the type of avocado involved. The dataset reports that type differentiates organic and conventional avocados, which is determined by the amount of detectable levels of pesticides residue. 
 
 ***
 
@@ -179,11 +179,6 @@ Like the previous model, this visualization gives us the insight that the avocad
 
 ## Initial conclusions
 
-Write:
-
-- What insight you would tell your grandmother
-- Your initial model selection choice, interaction or parallel slopes model, and why.
-
 From the initial glance at the visualizations, we conclude that organic avocados tend to consistently cost more on average across all the regions we highlighted. Furthermore, as the total volume of avocados sold increases, the average price gets less, which might be as a result of wholesale. As for the model selection, it seems like the interaction model would be the best choice since it contains variation compared to the parallel slopes model. Furthermore, the interaction model has additional complexity which can be seen by the additional rows in the interaction regression table, especially with the regression line of the Plains. Thus, we believe the interaction model is a much better representation of the dataset.   
 
 
@@ -194,14 +189,6 @@ From the initial glance at the visualizations, we conclude that organic avocados
 # Multiple linear regression
 
 ## Regression table
-
-Instructions:
-
-- Indicate which model you selected: parallel slopes or interaction.
-- Fit your selected regression model and display the regression table in the code 
-block below
-- Modify the template formula below from ModernDive 6.1.2 to match your model (this formula is written in the LaTeX typesetting language for printing mathematical formulas)
-
 
 We selected the interaction model, as there are slopes of the lines in the plots of the interaction model that we believe merits the additional complexity. There is a significant difference between the interaction and parallel slopes model graphs, especially with the Plains regression line.  
 
@@ -232,9 +219,6 @@ get_regression_table(avocado_model_interaction)
 
 
 ## Interpreting regression coefficients
-
-Interpret all regressions coefficients in the `estimate` column in the following list:
-
 For all the slopes, the values are incredibly small since to calculate the slope it would be y/x. Since we are mapping price to y and total volume to x. The avocados in our dataset are worth a maximum $3, while the total volume is millions. Thus, the denominator is significantly larger, making our values for the slopes small. In response to this, we mutated the total volume variable, by dividing it by 1,000,000 which doesn't alter the data, but makes it more accessible and easier to read.  
 
 The intercept term corresponds to the mean average price of avocados of 1.58 dollars in the Northeast. The Total.Volume term corresponds to the slope for the Northeast. For every increase of 1 unit in total volume, there is the associated decrease of on average $0.0757 dollars of average price. This means that in the Northeast, as one buys more avocados, the average price for each decreases (a reason could be due to wholesale). 
@@ -246,29 +230,17 @@ The region: West term corresponds to the offset in intercept for the West relati
 
 
 ## Inference for multiple regression
+1. The confidence intervals for the average slope for the total volume (in millions) of the Northeast region is (-0.094, -0.057), meaning that we can be 95% confident that this population parameter is between -0.094 and -0.057. 
 
-**You will complete the rest of Section 3 at the project resubmission phase due the last day of exams.**
-
-From the above regression table, interpret the confidence interval and p-value for at least two non-intercept terms:
-
-1. Interpretation 1
-The confidence intervals for the average slope for the total volume (in millions) of the Northeast region is (-0.094, -0.057), meaning that we can be 95% confident that this population parameter is between -0.094 and -0.057. 
-
-1. Interpretation 2
-
-The confidence intervals for the difference in average slope for the total volume (in millions) of the Plains region is (-0.277, -0.171), meaning that we can be 95% confident that the difference in average slope is between -0.277 and -0.171. 
+1. The confidence intervals for the difference in average slope for the total volume (in millions) of the Plains region is (-0.277, -0.171), meaning that we can be 95% confident that the difference in average slope is between -0.277 and -0.171. 
 
 
 ## Conditions for inference for regression
-
-Verify the **LINE** conditions for inference for regression for all confidence intervals and p-values from
-your regression table to have valid interpretation
-
 ### Linearity of relationship
 The relationship between total volume and average price appears to be negative and linear. 
 
 ### Independence of residuals
-The observations in our data must be independent of one another. In this data, we can not be sure this is the case, for example,  the avocados can be counted when multiple units are in a bag. Although it was told that the retail scan data comes directly from retailers’ cash registers based on actual retail sales of Hass avocados, we believe that we are not given enough information to verify this condition has been met.
+The observations in our data must be independent of one another. In this dataset, the avocado dataset had collected data by region and city. There's no documentation that explains how the data is collected, so we are unsure on whether or not each observation is independent of one another. For example, there were observations where region was Los Angeles, California, and West, respectively. Since some of these are subsets of the others (ie Los Angeles is in California which is also in the West), then we aren't sure if the observations were mutually exclusive. Thus, we believe that we are not given enough information to verify this condition has been met.
 
 ### Normality of residuals
 
@@ -316,7 +288,7 @@ ggplot(regression_points, aes(x = region, y = residual, fill=region)) +
   theme(legend.position="none") +
   scale_fill_brewer(palette="BuPu")
 ```
-From Fig 6 and Fig 7, we observe that the spread of the residuals increases as the value of total volume increases. Furthermore in Fig 8, comparing the spread/the IQR of each region's residuals, we see that they vary significantly. Therefore, this leads us to conclude that our regression model does not fulfill the condition since there is not equal variance across all values of the explanatory variable, total volume. Thus, any inference for regression based on this model is not valid because it yields such a pattern. 
+From Fig 6 and Fig 7, we observe that the spread of the residuals increases as the value of total volume increases. Furthermore in Fig 8, comparing the spread/the IQR of each region's residuals, we see that they vary significantly. Therefore, this leads us to conclude that our regression model does not fulfill the condition since there is not equal variance across all values of the explanatory variable, total volume. Thus, because it yields such a pattern, any inference for regression based on this model is not valid. 
 
 
 ***
@@ -325,7 +297,7 @@ From Fig 6 and Fig 7, we observe that the spread of the residuals increases as t
 
 
 
-
+ 
 
 
 
@@ -334,16 +306,27 @@ From Fig 6 and Fig 7, we observe that the spread of the residuals increases as t
 # Discussion 
 
 ## Conclusions
-From our initial conclusions, 
+Before we started analyzing our data, we speculated that regions farthest from where avocados are produced, assuming that avocados are produced in California and Mexico, would have higher average prices, and those closest would have lower prices. 
+
+This was mostly true - closer to the intercept, where the volume of avocado sales is 0, our analysis suggests that the Plains has the highest average price value of individual avocado sales, followed by the Northeast, and lastly, the West. The Northeast and West had relatively similar slopes, or differences in average price per unit of volume of sales, while the Plains had the steepest, or greater difference in average price per unit of volume of sales. However, this slope surprised us the most, because it suggests that after a certain volume of avocado sales, the average price of avocados drops to be less than that of the Northeast or the West, as suggested by our regression lines. 
+
+However, these are conclusions we can only take with a grain of salt as our regression model did not meet most of the conditions necessary for it to be legitimate, so we should only use this analysis as a preliminary one. Thus, we don't necessarily know if there's a relationship between the total volume and average price of Hass avocados in different regions of the US. 
+
+
 
 
 
 
 ## Limitations
+There were several limitations with our dataset. First, we were unsure of the how the data was collected, and thus this affected our conclusions on the independence of residuals. Since there was no documentation explaining how the data is collected, we aren't sure that the observations whether or not they are independent of each other.
+For our equality of variance condition, we think the distinction in volume size among the observations makes it difficult to judge the normality and spread of the residuals, particularly because there are observations clustered at 0, or a little under 1.25 million units of volume. Maybe readjusting the limits of our x-axis, the total volume, could help us analyze our data better since the distinctive x-values could be contributing to our data not appearing normal. 
+Lastly, our dataset is limited to Hass avocados, which is only one specific type of avocado. This dataset doesn't take into account other types of avocados, as well as undocumented avocado sales (which we have deemed to be "black market avocados"). 
 
 
 ## Further questions
-
+If we were to continue researching this topic, we would first want more information about the data. Specifically what unit the total volume is, as there was no documentation given. Knowing the units would give us more context about the data and give us more specific interpretations, rather than just calling it "total volume". 
+Next, we would like to know the process behind collecting data on city, state and region level. Because knowing this reason would gives us more clarification about the independence of residuals-- so we could see if it meets this condition.
+As for further analysis, we want to maybe look into look at how season affects avocado sales across regions. This would hopefully give us a more fruitful result compared to the one we got here. Since our results weren't too helpful in giving us an answer to our question, it would be interesting to have a dataset that would give us some insight on our research question. 
 
 
 ***
