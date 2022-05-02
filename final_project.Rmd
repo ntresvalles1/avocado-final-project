@@ -230,9 +230,17 @@ The region: West term corresponds to the offset in intercept for the West relati
 
 
 ## Inference for multiple regression
-1. The confidence intervals for the average slope for the total volume (in millions) of the Northeast region is (-0.094, -0.057), meaning that we can be 95% confident that this population parameter is between -0.094 and -0.057. 
+In the spirit of determining the relationship of the differences in average prices of avocados across the difference regions of the US, our hypothesis test would be examining the following:
 
-1. The confidence intervals for the difference in average slope for the total volume (in millions) of the Plains region is (-0.277, -0.171), meaning that we can be 95% confident that the difference in average slope is between -0.277 and -0.171. 
+Null Hypothesis: There is no difference in average price of avocado sales in different regions of the US.
+Alternative Hypothesis: There is a difference in average price of avocado sales in different regions of the US.
+
+$$\begin{aligned} H_0:& b_{NorthEast} = b_{Plains} \\\ \mbox{vs }H_A:& b_{NorthEast} \neq b_{Plains} \end{aligned}$$
+
+
+1. The confidence intervals for the average slope for the total volume (in millions) of the Northeast region is (-0.094, -0.057), meaning that we can be 95% confident that this population parameter is between -0.094 and -0.057. The p-value is 0, which would suggest that, for any choice of significance level α, we would reject the null hypothesis in favor of the alternate hypothesis. 
+
+1. The confidence intervals for the difference in average slope for the total volume (in millions) of the Plains region is (-0.277, -0.171), meaning that we can be 95% confident that the difference in average slope is between -0.277 and -0.171. The p-value here again is 0, which would suggest that, for any choice of significance level α, we would reject the null hypothesis in favor of the alternate hypothesis.
 
 
 ## Conditions for inference for regression
